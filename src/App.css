@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+
+.SearchHead{
+  font-family: 'Roboto', sans-serif;
+font-family: 'Unbounded', cursive;
+color: #0ccac4;
+}

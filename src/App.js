@@ -27,6 +27,7 @@ class App extends Component {
     return(
 
           <div className="App">
+            <h1 className='SearchHead'>Search For Your Friend</h1>
             <SearchBox placeholder="Search for Friend" searchHandler={this.handleChange}/>
 
             <CardList monster={filteredFriend}/>
