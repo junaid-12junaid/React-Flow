@@ -1,25 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
+import React,{Component} from 'react';
+import { render } from '@testing-library/react';
+import { CardList } from './components/card-list/card-list.component';
+import { SearchBox } from './components/SearchBox/search-box.component';
+class App extends Component {
+  constructor(){
+    super()
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    this.state={
+      monster:[],
+      searchFeild:""
+    }
+    // this.handleChange=this.handleChange.bind(this)
+  }
+  componentDidMount(){
+    fetch('https://jsonplaceholder.typicode.com/users').then(res=>res.json()).then(user=>this.setState({monster:user})).catch(err=>console.log("It is error"))
+  }
+
+  handleChange=(e)=>{
+    this.setState({searchFeild:e.target.value})
+  }
+  render(){
+    const {monster,searchFeild}=this.state
+    const filteredFriend=monster.filter(friend=>friend.name.toLowerCase().includes(searchFeild.toLowerCase()))
+    return(
+
+          <div className="App">
+            <SearchBox placeholder="Search for Friend" searchHandler={this.handleChange}/>
+
+            <CardList monster={filteredFriend}/>
+            
+            
+          </div>
+        );
+      };
+  
+  }
+
 
 export default App;
